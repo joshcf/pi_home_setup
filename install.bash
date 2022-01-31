@@ -16,9 +16,41 @@
 # 10 harden pi
 # 11 setup auto updating
 
+# Get variables
+
+# Get new pi password
+
+# Get new ip address (CIDR)
+# get current ip address
+currentIP=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}...')
+# Prompt to enter new ip
+
+read -p "Static IP in CIDR format (current IP $currentIP): " newIP
+
+# if newIP not entered, make same as currentIP
+
+# Get new gateway
+# get current gateway
+currentGateway=$(ip route | grep default | grep -oP '(?<=via\s)\d+(\.\d+){3}')
+
+read -p "Gateway IP (current gateway $currentGateway): " newGateway
+
+# if newGateway not entered, make same as currentGateway
+
+# Get DNS Server
+# get current DNS
+currentDNS=$(cat /etc/resolv.conf | grep -oP '(?<=nameserver\s)\d+(\.\d+){3}')
+
+read -P "DNS Server (current DNS $currentDNS): " newDNS
+
+# if newDNS not entered, make same as currentDNS
+
+# Get new Password
+
+read -sp "New pi user password: " newPassword
 
 # First we update the Pi
-apt update && apt upgrade
+apt update && apt -y upgrade
 
 
 # configure Pi
@@ -84,6 +116,8 @@ END
 
 # function to setup networking
 
+interface eth0
+static ip_address=
 
 # function to update pi
 
