@@ -116,16 +116,25 @@ END
 
 # function to setup networking
 
-interface eth0
-static ip_address=
+cat <<EOT >> /etc/dhcpcd.conf
 
-# function to update pi
+interface eth0
+static ip_address=$newIP
+static routers=$newGateway
+static domain_name_servers=$newDNS
+EOT
+
+
 
 
 # function to install pihole
 
+curl -sSL https://install.pi-hole.net | bash
+
 
 # function to setup blocklists
+
+apt install wireguard
 
 
 # function to setup wg0
