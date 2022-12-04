@@ -134,11 +134,17 @@ curl -sSL https://install.pi-hole.net | bash
 
 # function to setup blocklists
 
-apt install wireguard
+wget -O - https://raw.githubusercontent.com/jacklul/pihole-updatelists/master/install.sh | sudo bash
 
 
 # function to setup wg0
 
+apt install wireguard
+
+mkdir vpn
+cd vpn
+
+wget https://raw.githubusercontent.com/c4software/WireGuard-cli/master/wg-cli
 
 # function to setup facebook firewall block
 
